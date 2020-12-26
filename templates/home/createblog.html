@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Your Own Blog{% endblock title %}
+{% block createblogactive %} active {% endblock createblogactive %}
+
+
+{% block body %}
+<div class="container my-3">
+    <h3 class="text-center"><b><i>Create Your Own Post Here</i></b></h3>
+    <form action="/createblog/" method="post">
+        {% csrf_token %}
+        <div class="row my-4">
+            <div class="col-md-8">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title"
+                    placeholder="Enter Title Name" Required>
+            </div>
+            <div class="col-md-4">
+                <label for="author">Author Name</label>
+                <input type="text" class="form-control" id="author" name="author" aria-describedby="author"
+                    placeholder="Enter Author Name" Required>
+            </div>
+            <div class="col-12 my-2">
+                <label for="content">Content</label>
+                <textarea class="form-control" name="content" id="content" cols="70" rows="13"
+                    Required>Type Here!!!</textarea>
+            </div>
+            <div class="col-12 my-2">
+                <button type="submit" id="submit" class="btn btn-secondary mx-3">Post</button>
+            </div>
+        </div>
+    </form>
+    <script src="/static/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
+</div>
+{% endblock body %}

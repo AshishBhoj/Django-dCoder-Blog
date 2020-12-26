@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Home{% endblock title %}
+
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview');
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText;
+  })
+</script>
+{% endblock js %}
+
+{% block body %}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column bg-dark">
+  <main class="px-3 text-center text-light" style="margin-top: 90px;">
+    <h1 class="mt-4 my-2 text-danger">Welcome To dCoder Blog Page</h1>
+    <p class="lead mt-4 text-info">Best coding platform for learning and improving your skills</p>
+    <p class="lead text-primary">Learn and Master your skills. Create your way from a begineer to a advanced level programmer
+    </p>
+    <p class="lead text-success">Share your Ideas and Guide other's with your experience</p>
+    <p class="lead">
+      <a href="blog/" class="btn btn-outline-warning">Read Blog</a>
+    </p>
+  </main>
+  <hr>
+  <div class="container mt-4">
+    <div class="row mb-2">
+      <div class="col md-4">
+        <h2 class="text-center text-light">Latest Coding Articles</h2>
+        {% for post in allPosts  %}
+        <div
+          class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2"><a class="text-danger" href="/blog/{{post.slug}}">Article
+                by {{post.author}}</a> <span class="badge badge-pill badge-warning">{{post.views}}
+                views</span></strong>
+            <h3 class="mb-0"><a class="text-light" href="/blog/{{post.slug}}">{{post.title}}</a></h3>
+            <p class="card-text mb-auto">
+              <div class="preview text-light">{{post.content|safe| truncatechars:400}}</div>
+            </p>
+            <div class="my-2">
+              <a href="/blog/{{post.slug}}" role="button" class="btn btn-outline-light">Continue reading</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col md-4">
+        <h2 class="text-center text-light">Most Viewed Coding Articles</h2>
+        {% for Post in AllPosts  %}
+        <div
+          class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary"><a class="text-danger" href="/blog/{{Post.slug}}">Article by
+                {{Post.author}}</a> <span class="badge badge-pill badge-warning">{{Post.views}}
+                views</span></strong>
+            <h3 class="mb-0"><a class="text-light" href="/blog/{{Post.slug}}">{{Post.title}}</a></h3>
+            <p class="card-text mb-auto">
+              <div class="preview text-light">{{Post.content|safe| truncatechars:400}}</div>
+            </p>
+            <div class="my-2">
+              <a href="/blog/{{Post.slug}}" role="button" class="btn btn-outline-light">Continue reading</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <footer class="mt-auto text-white-50 text-center">
+    <p><a href="/" class="text-white">dCoder Blog</a>, by <a
+        href="createblog/" class="text-white">Ashish</a>.</p>
+  </footer>
+</div>
+{% endblock body %}
